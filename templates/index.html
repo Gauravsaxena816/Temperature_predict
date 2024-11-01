@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Temperature Prediction for the Next Hour</h2>
+    
+    <form action="/predict" method="post">
+        <label for="Relative_Humidity">Relative Humidity (%):</label>
+        <input type="number" step="any" id="Relative_Humidity" name="Relative_Humidity" required><br><br>
+
+        <label for="Pressure">Pressure (hPa):</label>
+        <input type="number" step="any" id="Pressure" name="Pressure" required><br><br>
+
+        <button type="submit">Predict Temperature</button>
+    </form>
+
+    {% if prediction is not none %}
+        <h3>Predicted Temperature: {{ prediction }}°C</h3>
+    {% endif %}
+
+    {% if error %}
+        <p style="color:red">{{ error }}</p>
+    {% endif %}
+</body>
+</html>
